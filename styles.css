@@ -11,3 +11,7 @@ body {
     width: 100vw;
     height: 50px;
 }
+
+#player-entry-form, #enemy-entry-form{
+    display: none;
+}
