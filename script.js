@@ -7,6 +7,8 @@ const enemySubmitBtn = document.getElementById("enemy-submit-btn")
 const playerCardContainer = document.getElementById("player-card-container")
 const enemyCardContainer = document.getElementById("enemy-card-container")
 
+const playerStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Consitution", "Intelligence", "Wisdom", "Charisma"]
+
 const createPlayerCard = (cardName) => {
     const card = document.createElement("div")
     card.className = "card"
@@ -24,11 +26,14 @@ window.addEventListener('load', () => {
     savedCards.forEach(cardName => createPlayerCard(cardName))
 })
 
-
-
 addPlayerBtn.addEventListener("click", () => {
     playerEntryForm.style.display = "block"
-
+    playerStats.forEach((stat) => {
+        playerEntryForm.innerHTML += `
+        <label class = "label">${stat}</label>
+        <input class = "${stat}-input">
+        `
+    })
 })
 
 addEnemyBtn.addEventListener("click", () => {
@@ -45,8 +50,6 @@ playerSubmitBtn.addEventListener("click", () => {
         savedCards.push(cardName);
         localStorage.setItem("playerCards", JSON.stringify(savedCards))
     }
-
-  
 })
 
 enemySubmitBtn.addEventListener("click", () => {
