@@ -7,8 +7,21 @@ const enemySubmitBtn = document.getElementById("enemy-submit-btn")
 const playerCardContainer = document.getElementById("player-card-container")
 const enemyCardContainer = document.getElementById("enemy-card-container")
 
+const createPlayerCard = (cardName) => {
+    const card = document.createElement("div")
+    card.className = "card"
+    const cardContent = `
+    <h3>${cardName}</h3>
+    `;
+
+    card.innerHTML = cardContent;
+    playerCardContainer.appendChild(card);
+}
+
+
 window.addEventListener('load', () => {
-    
+    const savedCards = JSON.parse(localStorage.getItem('playerCards')) || [];
+    savedCards.forEach(cardName => createPlayerCard(cardName))
 })
 
 
@@ -22,24 +35,21 @@ addEnemyBtn.addEventListener("click", () => {
     enemyEntryForm.style.display = "block"
 })
 
-playerSubmitBtn.addEventListener("click", (event) => {
-    event.preventDefault();
+playerSubmitBtn.addEventListener("click", () => {
     playerEntryForm.style.display = "none";
-    const createPlayerCard = () => {
-        const cardName = document.querySelector(".name-input").value
-        const card = document.createElement("div")
-        card.className = "card"
-        const cardContent = `
-        <h3>${cardName}</h3>
-        `;
-    
-        card.innerHTML = cardContent;
-        playerCardContainer.appendChild(card);
+    const cardName = document.querySelector(".name-input").value;
+    if (cardName) {
+        createPlayerCard(cardName);
+        // save card to local storage
+        const savedCards = JSON.parse(localStorage.getItem('playerCards')) || [];
+        savedCards.push(cardName);
+        localStorage.setItem("playerCards", JSON.stringify(savedCards))
     }
-  createPlayerCard()
+
+  
 })
 
 enemySubmitBtn.addEventListener("click", () => {
-    enemyEntryForm.style.display = "none"
+    enemyEntryForm.style.display = "none";
 })
 
