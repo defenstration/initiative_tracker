@@ -27,13 +27,17 @@ window.addEventListener('load', () => {
 })
 
 addPlayerBtn.addEventListener("click", () => {
-    playerEntryForm.style.display = "block"
+    playerEntryForm.style.display = "block";
+    playerEntryForm.innerHTML = `
+        <span class="close">&times;</span>
+    `;
     playerStats.forEach((stat) => {
         playerEntryForm.innerHTML += `
         <label class = "label">${stat}</label>
         <input class = "${stat}-input">
         `
-    })
+    });
+    
 })
 
 addEnemyBtn.addEventListener("click", () => {

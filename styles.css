@@ -25,3 +25,34 @@ body {
     height: 100px;
     width: 100px;
 }
+
+.form {
+    height: auto;
+    width: 100vh;
+    overflow: auto;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: aquamarine;
+}
+
+.submit {
+    z-index: 1;
+    background-color: black;
+    float: right;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
