@@ -15,3 +15,13 @@ body {
 #player-entry-form, #enemy-entry-form{
     display: none;
 }
+
+.card {
+    height: 50px;
+    width: auto;
+}
+
+#player-card-container {
+    height: 100px;
+    width: 100px;
+}

@@ -7,20 +7,10 @@ const enemySubmitBtn = document.getElementById("enemy-submit-btn")
 const playerCardContainer = document.getElementById("player-card-container")
 const enemyCardContainer = document.getElementById("enemy-card-container")
 
+window.addEventListener('load', () => {
+    
+})
 
-const createPlayerCard = () => {
-    const cardName = document.querySelector(".name-input")
-    const card = document.createElement("div")
-    card.className = "card"
-    const cardContent = `
-    <h3>${cardName}<h3>
-    `;
-
-    card.innerHTML = cardContent
-    playerCardContainer.appendChild(card)
-        
-
-}
 
 
 addPlayerBtn.addEventListener("click", () => {
@@ -32,10 +22,21 @@ addEnemyBtn.addEventListener("click", () => {
     enemyEntryForm.style.display = "block"
 })
 
-playerSubmitBtn.addEventListener("click", () => {
+playerSubmitBtn.addEventListener("click", (event) => {
+    event.preventDefault();
     playerEntryForm.style.display = "none";
-    createPlayerCard
-  
+    const createPlayerCard = () => {
+        const cardName = document.querySelector(".name-input").value
+        const card = document.createElement("div")
+        card.className = "card"
+        const cardContent = `
+        <h3>${cardName}</h3>
+        `;
+    
+        card.innerHTML = cardContent;
+        playerCardContainer.appendChild(card);
+    }
+  createPlayerCard()
 })
 
 enemySubmitBtn.addEventListener("click", () => {
