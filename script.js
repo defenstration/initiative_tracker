@@ -1,13 +1,13 @@
 const addPlayerBtn = document.getElementById('add-player-btn')
 const addEnemyBtn = document.getElementById('add-enemy-btn')
 const playerEntryForm = document.getElementById("player-entry-form")
-const playerSubmitBtn = document.getElementById("player-submit-btn")
+
 const enemyEntryForm = document.getElementById("enemy-entry-form")
 const enemySubmitBtn = document.getElementById("enemy-submit-btn")
 const playerCardContainer = document.getElementById("player-card-container")
 const enemyCardContainer = document.getElementById("enemy-card-container")
 
-const playerStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Consitution", "Intelligence", "Wisdom", "Charisma"]
+const playerStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
 
 const createPlayerCard = (cardName) => {
     const card = document.createElement("div")
@@ -37,24 +37,30 @@ addPlayerBtn.addEventListener("click", () => {
         <input class = "${stat}-input">
         `
     });
-    
+    playerEntryForm.innerHTML += `
+    <button type = "submit" id = "player-submit-btn">Submit</button>
+    ` 
+
+    const playerSubmitBtn = document.getElementById("player-submit-btn")
+
+    playerSubmitBtn.addEventListener("click", () => {
+        playerEntryForm.style.display = "none";
+        const cardName = document.querySelector(".Name-input").value;
+        if (cardName) {
+            createPlayerCard(cardName);
+            // save card to local storage
+            const savedCards = JSON.parse(localStorage.getItem('playerCards')) || [];
+            savedCards.push(cardName);
+            localStorage.setItem("playerCards", JSON.stringify(savedCards))
+        }
+    })
 })
 
 addEnemyBtn.addEventListener("click", () => {
     enemyEntryForm.style.display = "block"
 })
 
-playerSubmitBtn.addEventListener("click", () => {
-    playerEntryForm.style.display = "none";
-    const cardName = document.querySelector(".name-input").value;
-    if (cardName) {
-        createPlayerCard(cardName);
-        // save card to local storage
-        const savedCards = JSON.parse(localStorage.getItem('playerCards')) || [];
-        savedCards.push(cardName);
-        localStorage.setItem("playerCards", JSON.stringify(savedCards))
-    }
-})
+
 
 enemySubmitBtn.addEventListener("click", () => {
     enemyEntryForm.style.display = "none";
