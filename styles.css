@@ -59,6 +59,7 @@ body {
 .card {
     height: 50px;
     width: auto;
+    background-color: grey;
 }
 
 #player-card-container, #enemy-card-container {
