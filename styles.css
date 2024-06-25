@@ -56,10 +56,22 @@ body {
     display: none;
 }
 
-.card {
+.minimal-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
     height: 50px;
     width: auto;
     background-color: grey;
+}
+
+.expanded-content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: grey;
+    z-index: 1;
 }
 
 #player-card-container, #enemy-card-container {

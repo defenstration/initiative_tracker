@@ -5,6 +5,8 @@ const enemyEntryForm = document.getElementById("enemy-entry-form");
 const enemySubmitBtn = document.getElementById("enemy-submit-btn");
 const playerCardContainer = document.getElementById("player-card-container");
 const enemyCardContainer = document.getElementById("enemy-card-container");
+const playerDeleteBtn   = document.getElementById("delete-player-btn")
+const enemyDeleteBtn = document.getElementById('delete-enemy-btn')
 
 // list of player stats
 const playerStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"];
@@ -55,11 +57,11 @@ const generatePlayerCards = () => {
         // Hover effect to toggle between minimal and expanded states
         card.addEventListener("mouseover", () => {
             minimalContent.style.display = "none";
-            expandedContent.style.display = "block";
+            expandedContent.style.display = "flex";
         });
 
         card.addEventListener("mouseout", () => {
-            minimalContent.style.display = "block";
+            minimalContent.style.display = "flex";
             expandedContent.style.display = "none";
         });
 
