@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header id = "header">
         <h1>Initiative Tracker</h1>
     </header>
     <div id = "initiative-bar">
-
+        <div id = "player-initiative" class = "bar"></div>
+        <div id = "enemy-initiative" class = "bar"></div>
     </div>
     <div id = "information-container">
         <div id = "player-panels">
@@ -23,8 +24,10 @@
             <div id = "player-card-container">
 
             </div>
-
-            <button id = "add-player-btn" class = "btn">Add Player</button>
+            <div class = "btn-container">
+                <button id = "add-player-btn" class = "btn">Add Player</button>
+                <button id = "remove-player-btn" class = "btn">Delete Player</button>
+            </div>
         </div>
         <div id = "enemy-panels">
             
@@ -36,8 +39,10 @@
             <div id = "enemy-card-container">
 
             </div>
-
-            <button id = "add-enemy-btn" class = "btn">Add Enemy</button>
+            <div class = "btn-container">
+                <button id = "add-enemy-btn" class = "btn">Add Enemy</button>
+                <button id = "remove-enemy-btn" class = "btn">Delete Enemy</button>
+            </div>
         </div>
     </div>
     <script src = "script.js"></script>

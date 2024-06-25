@@ -10,8 +10,11 @@ const enemyCardContainer = document.getElementById("enemy-card-container")
 // list of player stats
 const playerStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
 
+// list of enemy stats
+const enemyStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
+
 // function to create player cards
-const createPlayerCard = (cardName) => {
+const createPlayerCard = () => {
     const card = document.createElement("div")
     card.className = "card"
     let cardContent = []
@@ -19,7 +22,7 @@ const createPlayerCard = (cardName) => {
     playerStats.forEach((stat) => {
         let statValue;
         const statInput = document.getElementById(`${stat}-input`)
-        if (statInput != null) {
+        if (statInput && statInput.value != null) {
             statValue = statInput.value
             console.log(statValue)
         } else {
@@ -29,9 +32,11 @@ const createPlayerCard = (cardName) => {
         
         cardContent.push( {stat: statValue} )
  
-        console.log(cardContent) 
+        
     })
-    card.innerHTML = cardContent;
+
+    console.log(cardContent) 
+    card.innerText = cardContent;
     playerCardContainer.appendChild(card);
 }
 
@@ -53,6 +58,7 @@ addPlayerBtn.addEventListener("click", () => {
         playerEntryForm.innerHTML += `
         <label class = "label">${stat}</label>
         <input class = "${stat}-input">
+        </br>
         `
     });
     playerEntryForm.innerHTML += `
@@ -78,7 +84,7 @@ addPlayerBtn.addEventListener("click", () => {
 
         
         if (cardName) {
-            createPlayerCard(cardName);
+            createPlayerCard();
             // save card to local storage
             const savedCards = JSON.parse(localStorage.getItem('playerCards')) || [];
             savedCards.push(cardName);
@@ -92,6 +98,18 @@ addPlayerBtn.addEventListener("click", () => {
 
 addEnemyBtn.addEventListener("click", () => {
     enemyEntryForm.style.display = "block"
+
+    enemyEntryForm.innerHTML = `
+    <span class= "close" id = "close">&times;</span>
+`;
+
+    //Add close button functionality
+    const closeBtn = document.getElementById("close")
+
+    closeBtn.addEventListener("click", () => {
+        enemyEntryForm.style.display = "none"
+        console.log('clicked')
+    })
 })
 
 
