@@ -13,29 +13,33 @@
     <div id = "initiative-bar">
 
     </div>
-    <div id = "player-panels">
-        <button id = "add-player-btn">Add Player</button>
-        <form id = "player-entry-form" class = "form">
+    <div id = "information-container">
+        <div id = "player-panels">
             
-            <button id = "player-submit-btn" type = "submit">Submit</button>
-        </form>
-        <div id = "player-card-container">
+            <form id = "player-entry-form" class = "form">
+                
+                <button id = "player-submit-btn" type = "submit">Submit</button>
+            </form>
+            <div id = "player-card-container">
 
+            </div>
+
+            <button id = "add-player-btn" class = "btn">Add Player</button>
+        </div>
+        <div id = "enemy-panels">
+            
+            <form id = "enemy-entry-form" class = "form">
+                <label class = "enemy label">Enemy Name</label>
+                <input class = "enemy-input enemy input">
+                <button id = "enemy-submit-btn" type = "submit">Submit</button>
+            </form>
+            <div id = "enemy-card-container">
+
+            </div>
+
+            <button id = "add-enemy-btn" class = "btn">Add Enemy</button>
         </div>
     </div>
-    <div id = "enemy-panels">
-        <button id = "add-enemy-btn">Add Enemy</button>
-        <form id = "enemy-entry-form" class = "form">
-            <label class = "enemy label">Enemy Name</label>
-            <input class = "enemy-input enemy input">
-            <button id = "enemy-submit-btn" type = "submit">Submit</button>
-        </form>
-        <div id = "enemy-card-container">
-
-        </div>
-
-    </div>
-
     <script src = "script.js"></script>
 </body>
 </html>

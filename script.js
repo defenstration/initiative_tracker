@@ -47,7 +47,7 @@ addPlayerBtn.addEventListener("click", () => {
     playerEntryForm.style.display = "block";
     // generates form fields using player stats list
     playerEntryForm.innerHTML = `
-        <span class="close">&times;</span>
+        <span class= "close" id = "close">&times;</span>
     `;
     playerStats.forEach((stat) => {
         playerEntryForm.innerHTML += `
@@ -58,6 +58,14 @@ addPlayerBtn.addEventListener("click", () => {
     playerEntryForm.innerHTML += `
     <button type = "submit" id = "player-submit-btn">Submit</button>
     ` 
+
+    //Add close button functionality
+    const closeBtn = document.getElementById("close")
+
+    closeBtn.addEventListener("click", () => {
+        playerEntryForm.style.display = "none"
+        console.log('clicked')
+    })
     // add player submit button functionality on form 
     const playerSubmitBtn = document.getElementById("player-submit-btn")
 

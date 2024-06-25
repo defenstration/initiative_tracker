@@ -7,6 +7,22 @@ body {
     margin: 0;
 }
 
+#information-container {
+    display: flex;
+    width: 100vw;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+}
+
+#player-panels, #enemy-panels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 #initiative-bar {
     width: 100vw;
     height: 50px;
@@ -21,9 +37,16 @@ body {
     width: auto;
 }
 
-#player-card-container {
-    height: 100px;
+#player-card-container, #enemy-card-container {
+    height: 95%;
+    width: 100%;
+}
+
+.btn {
+    height: 20px;
     width: 100px;
+    background-color: #aaa;
+    margin: auto;
 }
 
 .form {
