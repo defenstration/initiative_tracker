@@ -5,8 +5,15 @@ const enemyEntryForm = document.getElementById("enemy-entry-form");
 const enemySubmitBtn = document.getElementById("enemy-submit-btn");
 const playerCardContainer = document.getElementById("player-card-container");
 const enemyCardContainer = document.getElementById("enemy-card-container");
-const playerDeleteBtn   = document.getElementById("delete-player-btn")
-const enemyDeleteBtn = document.getElementById('delete-enemy-btn')
+const playerDeleteBtn   = document.getElementById("delete-player-btn");
+const enemyDeleteBtn = document.getElementById('delete-enemy-btn');
+const body = document.querySelector("body");
+const popUp = document.querySelector(".pop-up");
+const deletionTarget = document.getElementById("deletion-target");
+const confirmDeleteBtn = document.getElementById("confirm-deletion");
+const cancelDeleteBtn = document.getElementById("cancel-deletion");
+
+
 
 // list of player stats
 const playerStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"];
@@ -113,6 +120,7 @@ addPlayerBtn.addEventListener("click", () => {
     });
 });
 
+// Add enemy button to add enemy card
 addEnemyBtn.addEventListener("click", () => {
     enemyEntryForm.style.display = "block";
     enemyEntryForm.innerHTML = `
@@ -144,3 +152,60 @@ addEnemyBtn.addEventListener("click", () => {
         // You can implement saveEnemyData and generateEnemyCards similar to player functions if needed
     });
 });
+
+
+// Delete player button
+playerDeleteBtn.addEventListener("click", () => {
+    let i = 0
+    document.querySelectorAll(".card").forEach((card) => {
+        let btnExists = card.querySelector(".delete-player")
+
+        if (btnExists) {
+            return
+
+        } else {
+            card.innerHTML += `
+                <span class="delete-player" id="${i}">&times;</span>
+            `;
+            card.style.display = 'flex'
+            card.style.justifyContent = "center"
+            i++
+        }
+        
+    })
+
+    let playerDeleteBtn = document.querySelectorAll(".delete-player")
+
+    playerDeleteBtn.forEach((btn) => {
+        
+                
+        btn.addEventListener("click", () => {
+            let playerBtnId = btn.id
+            let playerStorageData = JSON.parse(localStorage.getItem('playerData'))
+            
+
+            popUp.style.display = 'flex'
+            deletionTarget.textContent = `${playerStorageData[playerBtnId]['name']}`
+
+            confirmDeleteBtn.addEventListener("click", () => {
+                console.log(playerStorageData[playerBtnId])
+                playerStorageData.splice(playerBtnId, 1)
+
+                localStorage.setItem('playerData', JSON.stringify(playerStorageData))
+
+                popUp.style.display = 'none'
+                deletionTarget.textContent = ''
+
+            })
+
+            cancelDeleteBtn.addEventListener("click", () => {
+                popUp.style.display = 'none'
+                deletionTarget.textContent = ''
+                location.reload()
+            })
+        })
+
+
+        
+    })
+})
