@@ -8,11 +8,13 @@ const enemyCardContainer = document.getElementById("enemy-card-container");
 const playerDeleteBtn   = document.getElementById("delete-player-btn");
 const enemyDeleteBtn = document.getElementById('delete-enemy-btn');
 const body = document.querySelector("body");
-const popUp = document.querySelector(".pop-up");
+const deletePopUp = document.querySelector("#deletion-pop-up");
+const initiativePopUp = document.getElementById("initiative-pop-up")
 const deletionTarget = document.getElementById("deletion-target");
 const confirmDeleteBtn = document.getElementById("confirm-deletion");
 const cancelDeleteBtn = document.getElementById("cancel-deletion");
-
+const rollForInitiativeBtn = document.getElementById("initiative-btn");
+const popUpContents =document.getElementById("pop-up-container");
 
 
 // list of player stats
@@ -20,6 +22,9 @@ const playerStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Streng
 
 // list of enemy stats
 const enemyStats = ["Name", "HP", "Initiative", "Armor Class", "Speed", "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"];
+
+// load player data
+let playerData = JSON.parse(localStorage.getItem('playerData'))
 
 // function to save player data
 const savePlayerData = (playerName) => {
@@ -184,7 +189,7 @@ playerDeleteBtn.addEventListener("click", () => {
             let playerStorageData = JSON.parse(localStorage.getItem('playerData'))
             
 
-            popUp.style.display = 'flex'
+            deletePopUp.style.display = 'flex'
             deletionTarget.textContent = `${playerStorageData[playerBtnId]['name']}`
 
             confirmDeleteBtn.addEventListener("click", () => {
@@ -193,13 +198,13 @@ playerDeleteBtn.addEventListener("click", () => {
 
                 localStorage.setItem('playerData', JSON.stringify(playerStorageData))
 
-                popUp.style.display = 'none'
+                deletePopUp.style.display = 'none'
                 deletionTarget.textContent = ''
-
+                location.reload()
             })
 
             cancelDeleteBtn.addEventListener("click", () => {
-                popUp.style.display = 'none'
+                deletePopUp.style.display = 'none'
                 deletionTarget.textContent = ''
                 location.reload()
             })
@@ -208,4 +213,41 @@ playerDeleteBtn.addEventListener("click", () => {
 
         
     })
+})
+
+// Roll for initiative
+rollForInitiativeBtn.addEventListener("click", () => {
+    rollForInitiativeBtn.style.display = "none"
+    initiativePopUp.style.display = "block"
+
+    playerData.forEach((player) => {
+        popUpContents.innerHTML += `
+        <div>${player.Name} Initative: ${player.Initiative} <input class = "initaitive-roll" id = "${player.Name}-roll" type = 'number' required></div>
+        `
+        
+    })
+
+    //submit initiative
+    let savedInitiative = []
+    let confirmInitiative = document.getElementById("confirm-initiative")
+    let inputs = document.querySelectorAll(".initiative-roll")
+
+    confirmInitiative.addEventListener("click", () => {
+        
+
+    })
+    
+
+    // Reset in cancelling initiative
+    let cancelInitiative = document.getElementById("cancel-initiative")
+
+    cancelInitiative.addEventListener("click", () => {
+        popUpContents.innerHTML = ''
+        initiativePopUp.style.display = 'none'
+        rollForInitiativeBtn.style.display = "block"
+    })
+
+    
+
+
 })
