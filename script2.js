@@ -44,7 +44,7 @@ let enemyData = JSON.parse(localStorage.getItem('enemyData'))
 
 // imports
 import * as pf from "./modules/playerFunctions.js";
-
+import * as ef from "./modules/enemyFunctions.js";
 
 
 // Player based functions 
@@ -74,6 +74,30 @@ playerDeleteBtn.addEventListener("click", () => {
 
 // Enemy based functions
 
+// Creates enemy cards from local storage on page load
+window.addEventListener('load', () => {
+    ef.generateEnemyCards(enemyData, enemyCardContainer, enemyStats);
+});
+
+// Add enemy button creates entry form
+addEnemyBtn.addEventListener("click", () => {
+    ef.generateEnemyForm(enemyEntryForm, enemyStats)
+    ef.enemySubmit(enemyEntryForm, enemyStats, enemyData, enemyCardContainer)
+
+    // Add close button functionality
+    const closeBtn = document.getElementById("close-enemy-form");
+    closeBtn.addEventListener("click", () => {
+        enemyEntryForm.style.display = "none";
+    });
+});
+
+// Delete enemy button
+enemyDeleteBtn.addEventListener("click", () => {
+    ef.deleteEnemy(enemyData)
+})
+
+
+/*
 // function to save enemy data
 const saveEnemyData = (enemyName) => {
     let enemyData = JSON.parse(localStorage.getItem('enemyData')) || [];
@@ -177,7 +201,7 @@ addEnemyBtn.addEventListener("click", () => {
 
 
 // Delete enemy button
-/*
+
 enemyDeleteBtn.addEventListener("click", () => {
     let i = 0
     document.querySelectorAll(".card").forEach((card) => {

@@ -119,7 +119,7 @@ body {
     flex-direction: column;
 }
 
-.delete-player {
+.delete-player, .delete-enemy {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,7 +130,7 @@ body {
     width: 50px;
 }
 
-.delete-player:hover {
+.delete-player:hover, .delete-enemy:hover {
     background-color: black;
     color: red;
 }

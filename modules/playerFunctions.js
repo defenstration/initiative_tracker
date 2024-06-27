@@ -1,4 +1,4 @@
-// Script for player functions for creation and deleting of player cards
+// Script for functions of creating and deleting player cards
 
 // function to save player data
 export const savePlayerData = (playerName, playerStats, playerData) => {
@@ -21,7 +21,7 @@ export const generatePlayerCards = (playerData, playerCardContainer, playerStats
 
     playerData.forEach((player) => {
         const card = document.createElement("div");
-        card.className = "card";
+        card.className = "player-card";
 
         // Minimal state content
         const minimalContent = document.createElement("div");
@@ -98,7 +98,7 @@ export const deletePlayer = (playerData) => {
     const confirmDeleteBtn = document.getElementById("confirm-deletion")
     const cancelDeleteBtn = document.getElementById("cancel-deletion");
 
-    document.querySelectorAll(".card").forEach((card) => {
+    document.querySelectorAll(".player-card").forEach((card) => {
         let btnExists = card.querySelector(".delete-player")
 
         if (btnExists) {
