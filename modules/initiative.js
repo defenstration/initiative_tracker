@@ -1,6 +1,6 @@
 // functions regarding initiative setting and progression
 
-
+// determine initiative to set turn order
 export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData) => {
     const initiativePopUp = document.getElementById("initiative-pop-up")
     const popUpContents =document.getElementById("pop-up-container");
@@ -12,7 +12,7 @@ export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData)
     let savedEnemyInitiative = []
     let playerKey = 0
     let enemyKey = 0
-
+    // generate forms to enter initiative
     playerData.forEach((player) => {
         popUpContents.innerHTML += `
         <div>${player.Name} Initative: ${player.Initiative} <input class = "initaitive-roll" id = "${player.Name}-roll" type = 'number' required></div>
@@ -30,16 +30,43 @@ export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData)
     })
 
 
-    //submit initiative
+    //submit initiative and save after rolls
     
     let confirmInitiative = document.getElementById("confirm-initiative")
-    let inputs = document.querySelectorAll(".initiative-roll")
+    let endCombat = document.getElementById("end-combat-button")
 
     confirmInitiative.addEventListener("click", () => {
+
+        savedPlayerInitiative.forEach((player) => {
+            let input = document.getElementById(`${player.name}-roll`)
+            if (input && input.value) {
+                player.initiative = parseInt(input.value) + parseInt(playerData[player.key]['Initiative'])
+            }
+        })
+
+
+        savedEnemyInitiative.forEach((enemy) => {
+            let input = document.getElementById(`${enemy.name}-roll`)
+            if (input && input.value) {
+                enemy.initiative = parseInt(input.value) + parseInt(enemyData[enemy.key]['Initiative'])
+            }
+        })
+
+
+        initiativePopUp.style.display = "none"
+        endCombat.style.display = "flex"
+
+        // set up player and enemy markers on initiative boards
         
 
-
+        // button to forcably end combat
+        endCombat.addEventListener("click", () => {
+            rollForInitiativeBtn.style.display = "inline-block"
+            endCombat.style.display = "none"
+        })
     })
+
+    // set up player and enemy markers on initiative boards
 
 
     // Reset in cancelling initiative

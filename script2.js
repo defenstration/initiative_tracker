@@ -3,15 +3,11 @@ const addPlayerBtn = document.getElementById('add-player-btn');
 const addEnemyBtn = document.getElementById('add-enemy-btn');
 const playerEntryForm = document.getElementById("player-entry-form");
 const enemyEntryForm = document.getElementById("enemy-entry-form");
-//const enemySubmitBtn = document.getElementById("enemy-submit-btn");
 const playerCardContainer = document.getElementById("player-card-container");
 const enemyCardContainer = document.getElementById("enemy-card-container");
 const playerDeleteBtn   = document.getElementById("delete-player-btn");
 const enemyDeleteBtn = document.getElementById('delete-enemy-btn');
-//const body = document.querySelector("body");
-//const initiativePopUp = document.getElementById("initiative-pop-up")
 const rollForInitiativeBtn = document.getElementById("initiative-btn");
-//const popUpContents =document.getElementById("pop-up-container");
 
 // --variables
 
