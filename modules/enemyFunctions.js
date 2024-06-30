@@ -6,7 +6,7 @@ export const saveEnemyData = (enemyName, enemyStats, enemyData) => {
     let enemyStatsData = { name: enemyName };
 
     enemyStats.forEach((stat) => {
-        const statInput = document.getElementById(`${stat}-input`);
+        const statInput = document.getElementById(`enemy-${stat}-input`);
         enemyStatsData[stat] = statInput && statInput.value ? statInput.value : 0;
     });
 
@@ -62,7 +62,7 @@ export const generateEnemyForm = (enemyEntryForm, enemyStats) => {
     enemyStats.forEach((stat) => {
         enemyEntryForm.innerHTML += `
             <label class="label">${stat}</label>
-            <input id="${stat}-input">
+            <input id="enemy-${stat}-input">
             <br>
         `;
     });
@@ -80,7 +80,7 @@ export const enemySubmit = (enemyEntryForm, enemyStats, enemyData, enemyCardCont
         enemyEntryForm.style.display = "none";
 
         // Create card from form inputs
-        const cardName = document.getElementById("Name-input").value;
+        const cardName = document.getElementById("enemy-Name-input").value;
 
         if (cardName) {
             saveEnemyData(cardName, enemyStats, enemyData);

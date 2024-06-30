@@ -6,7 +6,7 @@ export const savePlayerData = (playerName, playerStats, playerData) => {
     let playerStatsData = { name: playerName };
 
     playerStats.forEach((stat) => {
-        const statInput = document.getElementById(`${stat}-input`);
+        const statInput = document.getElementById(`player-${stat}-input`);
         playerStatsData[stat] = statInput && statInput.value ? statInput.value : 0;
     });
 
@@ -62,7 +62,7 @@ export const generatePlayerForm = (playerEntryForm, playerStats) => {
     playerStats.forEach((stat) => {
         playerEntryForm.innerHTML += `
             <label class="label">${stat}</label>
-            <input id="${stat}-input">
+            <input id="player-${stat}-input">
             <br>
         `;
     });
@@ -80,7 +80,7 @@ export const playerSubmit = (playerEntryForm, playerStats, playerData, playerCar
         playerEntryForm.style.display = "none";
 
         // Create card from form inputs
-        const cardName = document.getElementById("Name-input").value;
+        const cardName = document.getElementById("player-Name-input").value;
 
         if (cardName) {
             savePlayerData(cardName, playerStats, playerData);
