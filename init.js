@@ -32,5 +32,7 @@ export const determineInitiativeValues = () => {
 }
 
 // generate player and enemy markers
-
+export const generateInitiativeMarkers = () => {
+    
+}
 // cancel combat

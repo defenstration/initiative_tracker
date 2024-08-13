@@ -92,22 +92,35 @@ const populateTracker = (savedPlayerInitiative, savedEnemyInitiative) => {
     let playerInitiativeBar = document.getElementById("player-initiative")
     let enemyInitiativeBar = document.getElementById("enemy-initiative")
     let initiativeList = []
+    let initBar = document.querySelector('#player-initiative')
 
     savedPlayerInitiative.forEach((player) => {
-        playerInitiativeBar.innerHTML += `<div id = "${player.name}-marker" class = "initiative-marker player-marker">${player.name}</div>`
+        playerInitiativeBar.innerHTML += `<div id = "${player.name}-marker" class = "initiative-marker player-marker" initiative = "${parseInt(player.initiative)}">${player.name}</div>`
         initiativeList.push(parseInt(player.initiative))
-
     })
 
     savedEnemyInitiative.forEach((enemy) => {
-        enemyInitiativeBar.innerHTML += `<div id = "${enemy.name}-marker" class = "initiative-marker enemy-marker">${enemy.name}</div>`
+    enemyInitiativeBar.innerHTML += `<div id = "${enemy.name}-marker" class = "initiative-marker enemy-marker" initiative = "${parseInt(enemy.initiative)}">${enemy.name}</div>`
         initiativeList.push(parseInt(enemy.initiative))
     })
-    console.log(initiativeList)
+
     let initMax = Math.max(...initiativeList)
-    console.log(initMax)
     let initMin = Math.min(...initiativeList)
     let initModifier = initMax - initMin
-    console.log(initModifier)
+    
+    let cards = document.querySelectorAll(".initiative-marker")
 
+    cards.forEach((card, index) => {
+        console.log(card.getAttribute("initiative"))
+        //console.log(index/cards.length*100)
+        card.style.left = `${index/cards.length*100}%`
+
+        card.addEventListener("click", () => {
+            
+            if (index === 0){
+                
+            }
+            
+        })
+    })
 }
