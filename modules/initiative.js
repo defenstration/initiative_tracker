@@ -4,7 +4,6 @@
 export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData) => {
     const initiativePopUp = document.getElementById("initiative-pop-up")
     const popUpContents =document.getElementById("pop-up-container");
-
     rollForInitiativeBtn.style.display = "none"
     initiativePopUp.style.display = "block"
 
@@ -30,11 +29,9 @@ export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData)
         enemyKey += 1        
     })
 
-
     //submit initiative and save after rolls
     
     let confirmInitiative = document.getElementById("confirm-initiative")
-    let endCombat = document.getElementById("end-combat-button")
 
     confirmInitiative.addEventListener("click", () => {
 
@@ -45,7 +42,6 @@ export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData)
             }
         })
 
-
         savedEnemyInitiative.forEach((enemy) => {
             let input = document.getElementById(`${enemy.name}-roll`)
             if (input && input.value) {
@@ -53,25 +49,11 @@ export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData)
             }
         })
 
-
         initiativePopUp.style.display = "none"
-        endCombat.style.display = "flex"
 
         // set up player and enemy markers on initiative boards
-        populateTracker(savedPlayerInitiative, savedEnemyInitiative)
-
-
-
-        // button to forcably end combat
-
-        
-        endCombat.addEventListener("click", () => {
-            console.log('clicked')
-            rollForInitiativeBtn.style.display = "inline-block"
-            endCombat.style.display = "none"
-        })
+        populateTracker(savedPlayerInitiative, savedEnemyInitiative, rollForInitiativeBtn)
     })
-
 
     // Reset in cancelling initiative
     let cancelInitiative = document.getElementById("cancel-initiative")
@@ -88,11 +70,12 @@ export const determineInitiative = (rollForInitiativeBtn, playerData, enemyData)
 }
 
     // set up player and enemy markers on initiative board
-const populateTracker = (savedPlayerInitiative, savedEnemyInitiative) => {
+const populateTracker = (savedPlayerInitiative, savedEnemyInitiative, rollForInitiativeBtn) => {
     let playerInitiativeBar = document.getElementById("player-initiative")
     let enemyInitiativeBar = document.getElementById("enemy-initiative")
     let initiativeList = []
-    let initBar = document.querySelector('#player-initiative')
+
+    playerInitiativeBar.innerHTML += `<span class="close" id="end-combat-button">&times;</span>`
 
     savedPlayerInitiative.forEach((player) => {
         playerInitiativeBar.innerHTML += `<div id = "${player.name}-marker" class = "initiative-marker player-marker" initiative = "${parseInt(player.initiative)}">${player.name}</div>`
@@ -104,23 +87,56 @@ const populateTracker = (savedPlayerInitiative, savedEnemyInitiative) => {
         initiativeList.push(parseInt(enemy.initiative))
     })
 
+    let initiativeMarkers = document.querySelectorAll(".initiative-marker")
+
+    let cards = Array.from(initiativeMarkers)
+
+    const sortInit = () => {
+        cards.sort( (a,b) => (
+        b.getAttribute("initiative") - a.getAttribute("initiative")
+    ))}
+
+    const setPosition = () => {
+        cards.forEach((card, index) => {
+        card.style.left = `${index/cards.length*100}%`
+    })}
+
     let initMax = Math.max(...initiativeList)
     let initMin = Math.min(...initiativeList)
     let initModifier = initMax - initMin
-    
-    let cards = document.querySelectorAll(".initiative-marker")
 
-    cards.forEach((card, index) => {
-        console.log(card.getAttribute("initiative"))
-        //console.log(index/cards.length*100)
-        card.style.left = `${index/cards.length*100}%`
+    const handleClick = () => {
+        cards[0].setAttribute('initiative', `${parseInt(cards[0].getAttribute('initiative')) + initModifier}`) 
+        cards.push(cards.shift())
+        setPosition()
+        applyListener()
+    }
 
-        card.addEventListener("click", () => {
-            
-            if (index === 0){
-                
-            }
-            
-        })
+    const applyListener = () => {
+        cards[0].addEventListener("click", () => {
+        handleClick()
+    }, {once: true})
+    }
+
+    sortInit()
+    setPosition()
+    applyListener()
+
+    // button to forcably end combat  
+
+    const endCombat = document.getElementById("end-combat-button")
+    endCombat.style.display = "flex"
+
+    console.log(rollForInitiativeBtn)
+
+    endCombat.addEventListener("click", () => {
+        initiativeMarkers.forEach((marker) => {
+            marker.remove()
+        });
+        //endCombat.remove()
+        
+        rollForInitiativeBtn.style.display = "block";
+        
     })
 }
+
