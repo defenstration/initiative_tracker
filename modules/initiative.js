@@ -129,13 +129,20 @@ const populateTracker = (savedPlayerInitiative, savedEnemyInitiative, rollForIni
 
     console.log(rollForInitiativeBtn)
 
-    endCombat.addEventListener("click", () => {
-        initiativeMarkers.forEach((marker) => {
-            marker.remove()
-        });
-        //endCombat.remove()
-        
+    const cancelClickHandler = () => {
         rollForInitiativeBtn.style.display = "block";
+
+        initiativeMarkers.forEach((marker) => {
+        marker.remove()
+        });
+        
+        //endCombat.remove()
+    }        
+
+    endCombat.addEventListener("click", () => {
+
+        cancelClickHandler()
+        
         
     })
 }
