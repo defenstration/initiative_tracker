@@ -126,22 +126,11 @@ const populateTracker = (savedPlayerInitiative, savedEnemyInitiative, rollForIni
 
     const endCombat = document.getElementById("end-combat-button")
     endCombat.style.display = "flex"
-
-    console.log(rollForInitiativeBtn)
-
-    const cancelClickHandler = () => {
-        rollForInitiativeBtn.style.display = "block";
-
-        initiativeMarkers.forEach((marker) => {
-        marker.remove()
-        });
-        
-        //endCombat.remove()
-    }        
+      
 
     endCombat.addEventListener("click", () => {
 
-        cancelClickHandler()
+        window.location.reload()
         
         
     })
